@@ -1,8 +1,8 @@
-import { Router } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
 import { Routes, Route } from "react-router-dom";
+import Checkout from "./Checkout";
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
             <Routes>
                 {/* Home */}
                 <Route path="/" element={<Home />} />
-                <Route path="/checkout" element={<h1>Checkout Page</h1>} />
+                <Route path="/checkout" element={<Checkout />} />
             </Routes>
         </div>
     );
