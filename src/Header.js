@@ -4,9 +4,16 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
+import { auth } from "./firebase";
 
 function Header() {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }] = useStateValue();
+
+    const signOutHandler = () => {
+        if (user) {
+            auth.signOut();
+        }
+    };
 
     return (
         <div className="header">
@@ -29,12 +36,14 @@ function Header() {
             {/* header nav */}
             <div className="header__nav">
                 {/* sign in */}
-                <Link to="/login">
-                    <div className="header__option">
+                <Link to={!user ? "/login" : null}>
+                    <div className="header__option" onClick={signOutHandler}>
                         <span className="header__optionLineOne">
-                            Hello, Guest
+                            Hello, {user ? "User" : "Guest"}
                         </span>
-                        <span className="header__optionLineTwo">Sign In</span>
+                        <span className="header__optionLineTwo">
+                            {user ? "Sign Out" : "Sign In"}
+                        </span>
                     </div>
                 </Link>
 
